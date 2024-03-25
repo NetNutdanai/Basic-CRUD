@@ -18,12 +18,40 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
-        $validatedData = $request->validate({
+        $data = $request->validate([
             'name' => 'required',
-            'price' -> 'required|numeric'
-            
-        });
+            'qty' =>'required|numeric',
+            'price'=>'required|decimal:0, 2',
+            'description' => 'nullable'
+        ]);
 
-        $product = new Product;
+        $newProduct = Product::create($data);
+
+        return redirect(route('product.index'));
     }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        return view('product.edit', compact('product'));
+    }
+
+    public function update(Request $request, $id){
+        $product = Product::find($id);
+        $data = $request->validate([
+            'name' => 'required',
+            'qty' =>'required|numeric',
+            'price'=>'required|decimal:0, 2',
+            'description' => 'nullable'
+        ]);
+
+        $product ->update($data);
+
+        return redirect(route('product.index'));
+    }
+
+    public function delete($id){
+        $product = Product::find($id);
+        $product->delete();
+        return redirect(route('product.index'));    }
 }

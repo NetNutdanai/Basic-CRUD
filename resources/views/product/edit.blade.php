@@ -17,23 +17,24 @@
             </ul>
         @endif
     </div>
-    <form action="{{url('/product')}}" method="POST">
+    <form action="{{ route('product.update', $product->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group mb-3">
             <label for="name">Name: </label>
-            <input type="text" name="name" class="form-control" placeholder="Product Name...">
+            <input type="text" name="name" class="form-control" placeholder="Product Name..." value ={{$product->name}}>
         </div>
         <div class="form-group mb-3">
             <label for="qty">Qty: </label>
-            <input type="text" name="qty" class="form-control" placeholder="Qty...">
+            <input type="text" name="qty" class="form-control" placeholder="Qty..." value ={{$product->qty}}>
         </div>
         <div class="form-group mb-3">
             <label for="price">Price: </label>
-            <input type="text" name="price" class="form-control" placeholder="Price...">
+            <input type="text" name="price" class="form-control" placeholder="Price..." value ={{$product->price}}>
         </div>
         <div class="form-group mb-3">
             <label for="description">Description: </label>
-            <input type="text" name="description" class="form-control" placeholder="Description...">
+            <input type="text" name="description" class="form-control" placeholder="Description..." value ={{$product->description}}>
         </div>
         <button type="submit">Submit</button>
     </form>
