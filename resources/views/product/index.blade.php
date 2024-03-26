@@ -39,6 +39,7 @@
                     <td>{{ $products->price }}</td>
                     <td>{{ $products->description }}</td>
                     <td style=" display : flex;justify-content:center"><a href="{{route('product.edit',$products->id)}}" style=" margin-right:10px">Edit</a>
+
                         <form action="{{route('product.delete',$products->id)}}" method= "POST">
                             @csrf
                             @method("DELETE")
